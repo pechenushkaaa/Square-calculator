@@ -15,32 +15,32 @@ public class TriangleSquareCalculatorTest
         var expected2 = CalculateExpectedSquare(sides2[0], sides2[1], sides2[2]);
         
         // act + assert
-        var figure = new TriangleSquareCalculator(sides1[0], sides1[1], sides1[2]);
-        Assert.That(figure.CalculateSquare(), Is.EqualTo(expected1));
+        var calculator = new TriangleSquareCalculator(sides1[0], sides1[1], sides1[2]);
+        Assert.That(calculator.CalculateSquare(), Is.EqualTo(expected1));
 
-        figure.A = sides2[0];
-        figure.B = sides2[1];
-        figure.C = sides2[2];
-        Assert.That(figure.CalculateSquare(), Is.EqualTo(expected2));
+        calculator.A = sides2[0];
+        calculator.B = sides2[1];
+        calculator.C = sides2[2];
+        Assert.That(calculator.CalculateSquare(), Is.EqualTo(expected2));
     }
     
     [Test]
     public void TestTriangleSquareCalculator_CheckRightTriangle()
     {
         // arrange
-        var figure = new TriangleSquareCalculator(3d, 4d, 5d);
+        var calculator = new TriangleSquareCalculator(3d, 4d, 5d);
         
         // act + assert
-        Assert.That(figure.IsRightAngledTriangle(), Is.True);
+        Assert.That(calculator.IsRightAngledTriangle(), Is.True);
 
-        figure = new TriangleSquareCalculator(4d, 5d, 3d);
-        Assert.That(figure.IsRightAngledTriangle(), Is.True);
+        calculator = new TriangleSquareCalculator(4d, 5d, 3d);
+        Assert.That(calculator.IsRightAngledTriangle(), Is.True);
         
-        figure = new TriangleSquareCalculator( 5d, 3d, 4d);
-        Assert.That(figure.IsRightAngledTriangle(), Is.True);
+        calculator = new TriangleSquareCalculator( 5d, 3d, 4d);
+        Assert.That(calculator.IsRightAngledTriangle(), Is.True);
         
-        figure = new TriangleSquareCalculator( 5d, 3d, 3d);
-        Assert.That(figure.IsRightAngledTriangle(), Is.False);
+        calculator = new TriangleSquareCalculator( 5d, 3d, 3d);
+        Assert.That(calculator.IsRightAngledTriangle(), Is.False);
     }
     
     [Test]
@@ -52,8 +52,11 @@ public class TriangleSquareCalculatorTest
     [TestCase(3d, 4d, -5d)]
     public void TestTriangleSquareCalculator_CheckForZeroOrNegativeValue(double a, double b, double c)
     {
+        // arrange 
+        var calculator = new TriangleSquareCalculator(a, b, c);
+        
         // act + assert
-        Assert.Throws<ZeroOrNegativeFieldException>(() => _ = new TriangleSquareCalculator(a, b, c));
+        Assert.Throws<ZeroOrNegativeFieldException>(() => calculator.CalculateSquare());
     }
     
     [Test]
@@ -62,8 +65,11 @@ public class TriangleSquareCalculatorTest
     [TestCase(12d, 2d, 5d)]
     public void TestTriangle_CheckForCorrectTriangleSidesCondition(double a, double b, double c)
     {
+        // arrange 
+        var calculator = new TriangleSquareCalculator(a, b, c);
+        
         // act + assert
-        Assert.Throws<IncorrectTriangleSidesException>(() => _ = new TriangleSquareCalculator(a, b, c));
+        Assert.Throws<IncorrectTriangleSidesException>(() => calculator.CalculateSquare());
     }
 
     private static double CalculateExpectedSquare(double a, double b, double c)

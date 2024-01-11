@@ -6,19 +6,13 @@
 /// </summary>
 public class CircleSquareCalculator : ISquareCalculator
 {
-    private double _radius;
-
-    public double Radius
-    {
-        set
-        {
-            Validator.CheckForZeroOrNegativeValue(nameof(Radius), value);
-            _radius = value;
-        }
-        get => _radius;
-    }
+    public double Radius { set; get; }
 
     public CircleSquareCalculator(double radius = 0) => Radius = radius;
 
-    public double CalculateSquare() => Math.PI * _radius * _radius;
+    public double CalculateSquare()
+    {
+        Validator.CheckForZeroOrNegativeValue(nameof(Radius), Radius);
+        return Math.PI * Radius * Radius;
+    }
 }

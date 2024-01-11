@@ -15,11 +15,11 @@ public class CircleSquareCalculatorTest
         const double expected2 = Math.PI * radius2 * radius2;
         
         // act + assert
-        var figure = new CircleSquareCalculator(radius1);
-        Assert.That(figure.CalculateSquare(), Is.EqualTo(expected1));
+        var calculator = new CircleSquareCalculator(radius1);
+        Assert.That(calculator.CalculateSquare(), Is.EqualTo(expected1));
 
-        figure.Radius = radius2;
-        Assert.That(figure.CalculateSquare(), Is.EqualTo(expected2));
+        calculator.Radius = radius2;
+        Assert.That(calculator.CalculateSquare(), Is.EqualTo(expected2));
     }
     
     [Test]
@@ -27,15 +27,12 @@ public class CircleSquareCalculatorTest
     {
         // arrange
         const int radius1 = -2;
-        CircleSquareCalculator? figure = null;
+        var calculator = new CircleSquareCalculator();
         
         // act + assert
-        Assert.Throws<ZeroOrNegativeFieldException>(() => figure = new CircleSquareCalculator());
-        Assert.That(figure, Is.Null);
+        Assert.Throws<ZeroOrNegativeFieldException>(() => calculator.CalculateSquare());
         
-        figure = new CircleSquareCalculator(2);
-        
-        Assert.Throws<ZeroOrNegativeFieldException>(() => figure.Radius = radius1);
-        Assert.That(figure.Radius, Is.EqualTo(2));
+        calculator.Radius = radius1;
+        Assert.Throws<ZeroOrNegativeFieldException>(() => calculator.CalculateSquare());
     }
 }

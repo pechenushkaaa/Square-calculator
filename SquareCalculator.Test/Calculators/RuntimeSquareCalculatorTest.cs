@@ -28,10 +28,10 @@ public class RuntimeSquareCalculatorTest
         var expected =  Math.Sqrt(p * (p - args[0]) * (p - args[1]) * (p - args[2]));
         
         // act
-        ISquareCalculator figure = new RuntimeSquareCalculator(args);
+        ISquareCalculator calculator = new RuntimeSquareCalculator(args);
         
         // assert
-        Assert.That(figure.CalculateSquare(), Is.EqualTo(expected));
+        Assert.That(calculator.CalculateSquare(), Is.EqualTo(expected));
 
     }
     
@@ -50,8 +50,8 @@ public class RuntimeSquareCalculatorTest
         // act + assert
         Assert.Throws<UnexpectedSquareCalculatorException>(() =>
         {
-            var figure = new RuntimeSquareCalculator(args);
-            figure.CalculateSquare();
+            var calculator = new RuntimeSquareCalculator(args);
+            calculator.CalculateSquare();
         });
     }
 }
